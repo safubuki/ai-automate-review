@@ -44,7 +44,7 @@ jobs:
             ${{ github.event.pull_request.body || '（本文なし）' }}
           diff: |
             ${{ steps.diff.outputs.content }}
-ENDOFFILE
+          ENDOFFILE
           sed -i 's/^  //' /tmp/ai-review-input.yml
           echo "input-file=/tmp/ai-review-input.yml" >> $GITHUB_OUTPUT
 
