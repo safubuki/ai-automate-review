@@ -22,38 +22,30 @@ jobs:
           fetch-depth: 0
 
       - name: Get PR diff
-        id: diff
         run: |
           gh pr diff ${{ github.event.pull_request.number }} --patch > pr.diff
           # 差分サイズを取得（大規模PR対策の参考用）
-          echo "size=$(stat -c%s pr.diff)" >> $GITHUB_OUTPUT
-          # 内容をoutputにセット（サイズが大きい場合は後段で制御）
-          echo "content<<EOF" >> $GITHUB_OUTPUT
-          cat pr.diff >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          echo "Generated PR diff ($(stat -c%s pr.diff) bytes)"
         env:
           GH_TOKEN: ${{ github.token }}
 
-      - name: Prepare AI input
-        id: prepare-input
+      - name: Prepare AI input files
         run: |
-          cat > /tmp/ai-review-input.yml << 'EOF'
-          pr_title: |
-            ${{ github.event.pull_request.title }}
-          pr_body: |
-            ${{ github.event.pull_request.body || '（本文なし）' }}
-          diff: |
-            ${{ steps.diff.outputs.content }}
-          EOF
-          sed -i 's/^  //' /tmp/ai-review-input.yml
-          echo "input-file=/tmp/ai-review-input.yml" >> $GITHUB_OUTPUT
+          printf '%s' "$PR_TITLE" > /tmp/ai-pr-title.txt
+          printf '%s' "$PR_BODY" > /tmp/ai-pr-body.txt
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body || '（本文なし）' }}
 
       - name: AI Documentation Review
         id: review
         uses: actions/ai-inference@v1
         with:
           prompt-file: .github/prompts/docs-review.prompt.yml
-          file_input: ${{ steps.prepare-input.outputs.input-file }}
+          file_input: |
+            pr_title: /tmp/ai-pr-title.txt
+            pr_body: /tmp/ai-pr-body.txt
+            diff: pr.diff
 
       - name: Post review summary
         uses: peter-evans/create-or-update-comment@v4
