@@ -37,15 +37,24 @@ jobs:
       - name: Prepare AI input
         id: prepare-input
         run: |
-          cat > /tmp/ai-review-input.yml << 'EOF'
-pr_title: |
-  ${{ github.event.pull_request.title }}
+          python3 - << 'PYEOF'
+import os
+
+title = """${{ github.event.pull_request.title }}"""
+body = """${{ github.event.pull_request.body || '（本文なし）' }}"""
+diff = """${{ steps.diff.outputs.content }}"""
+
+with open('/tmp/ai-review-input.yml', 'w', encoding='utf-8') as f:
+    f.write(f'''pr_title: |
+  {title}
 pr_body: |
-  ${{ github.event.pull_request.body || '（本文なし）' }}
+  {body}
 diff: |
-  ${{ steps.diff.outputs.content }}
-EOF
-          echo "input-file=/tmp/ai-review-input.yml" >> $GITHUB_OUTPUT
+  {diff}
+''')
+
+print("input-file=/tmp/ai-review-input.yml")
+PYEOF
 
       - name: AI Documentation Review
         id: review
