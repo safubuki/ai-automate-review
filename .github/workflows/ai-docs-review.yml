@@ -39,10 +39,15 @@ jobs:
         uses: actions/ai-inference@v1
         with:
           prompt-file: .github/prompts/docs-review.prompt.yml
+          # Use block scalars (|) for each variable to safely handle titles/bodies
+          # that contain special characters like colons (common in "docs:", "feat:", etc.)
           input: |
-            pr_title: ${{ github.event.pull_request.title }}
-            pr_body: ${{ github.event.pull_request.body || '（本文なし）' }}
-            diff: ${{ steps.diff.outputs.content }}
+            pr_title: |
+              ${{ github.event.pull_request.title }}
+            pr_body: |
+              ${{ github.event.pull_request.body || '（本文なし）' }}
+            diff: |
+              ${{ steps.diff.outputs.content }}
 
       - name: Post review summary
         uses: peter-evans/create-or-update-comment@v4
