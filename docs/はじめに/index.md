@@ -21,7 +21,7 @@
 ## 次のステップ
 
 - [用語集](../用語集.md) を必ず一読してください
-- [セットアップガイド](../../guide/SETUP_GUIDE.md) で自分の環境への導入方法を確認できます
+- [セットアップガイド](https://github.com/safubuki/ai-automate-review/blob/main/guide/SETUP_GUIDE.md) で自分の環境への導入方法を確認できます
 
 ## 連絡先
 

@@ -33,7 +33,7 @@ mkdocs serve
 
 ### 2. AIレビューを体験する（方式2）
 
-詳細は [セットアップガイド](../guide/SETUP_GUIDE.md) を参照してください。
+詳細は [セットアップガイド](https://github.com/safubuki/ai-automate-review/blob/main/guide/SETUP_GUIDE.md) を参照してください。
 
 ## ドキュメント構成
 
@@ -44,8 +44,8 @@ mkdocs serve
 
 ## 関連リンク
 
-- [セットアップガイド](../guide/SETUP_GUIDE.md) — この仕組みを自分のリポジトリに導入する方法
-- [元の仕様書](../guide/original-spec.md) — 設計思想の詳細
+- [セットアップガイド](https://github.com/safubuki/ai-automate-review/blob/main/guide/SETUP_GUIDE.md) — この仕組みを自分のリポジトリに導入する方法
+- [元の仕様書](https://github.com/safubuki/ai-automate-review/blob/main/guide/original-spec.md) — 設計思想の詳細
 
 ---
 
