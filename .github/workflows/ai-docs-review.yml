@@ -38,13 +38,14 @@ jobs:
         id: prepare-input
         run: |
           cat > /tmp/ai-review-input.yml << 'ENDOFFILE'
-pr_title: |
-  ${{ github.event.pull_request.title }}
-pr_body: |
-  ${{ github.event.pull_request.body || '（本文なし）' }}
-diff: |
-  ${{ steps.diff.outputs.content }}
-ENDOFFILE
+          pr_title: |
+            ${{ github.event.pull_request.title }}
+          pr_body: |
+            ${{ github.event.pull_request.body || '（本文なし）' }}
+          diff: |
+            ${{ steps.diff.outputs.content }}
+          ENDOFFILE
+          sed -i 's/^  //' /tmp/ai-review-input.yml
           echo "input-file=/tmp/ai-review-input.yml" >> $GITHUB_OUTPUT
 
       - name: AI Documentation Review
