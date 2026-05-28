@@ -1,0 +1,68 @@
+site_name: AI PRレビュー自動化 サンプル
+site_description: GitHub公式機能によるドキュメントレビュー自動化のデモ環境
+site_author: AI Automate Review Team
+site_url: https://example.com/
+
+repo_url: https://github.com/safubuki/ai-automate-review
+repo_name: ai-automate-review
+
+theme:
+  name: material
+  language: ja
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+
+nav:
+  - ホーム: index.md
+  - はじめに:
+      - 概要: はじめに/index.md
+  - 運用手順:
+      - 本番デプロイ手順: 運用手順/deploy-procedure.md
+      - 障害対応手順（サンプル）: 運用手順/incident-response.md
+  - 開発ガイド:
+      - 貢献ガイド: 開発ガイド/contributing.md
+  - 用語集: 用語集.md
+  - セットアップガイド:
+      - 導入ガイド: guides/SETUP_GUIDE.md
+      - 設計仕様書（参考）: guides/original-spec.md
+
+plugins:
+  - search:
+      lang:
+        - ja
+        - en
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - tables
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/safubuki/ai-automate-review
+
+copyright: Copyright &copy; 2026 AI Automate Review Project
