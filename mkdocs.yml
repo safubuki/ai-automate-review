@@ -42,9 +42,6 @@ nav:
   - 開発ガイド:
       - 貢献ガイド: 開発ガイド/contributing.md
   - 用語集: 用語集.md
-  - セットアップガイド:
-      - 導入ガイド: guides/SETUP_GUIDE.md
-      - 設計仕様書（参考）: guides/original-spec.md
 
 plugins:
   - search:
